@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend server from realtime-chat",
+  "main": "index.js",
+  "author": "TheStrikeM",
+  "license": "ISC",
+  "type": "module",
+  "private": false,
+  "dependencies": {
+    "config": "^3.3.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "socket.io": "^3.1.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}

@@ -1,0 +1,4 @@
+server/node_modules
+.idea
+.gitignore
+server/yarn.lock
