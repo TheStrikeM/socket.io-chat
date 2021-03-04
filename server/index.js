@@ -1,26 +1,26 @@
-import config from "config"
-import express from "express"
-import cors from 'cors'
-import http from 'http'
-import socket from 'socket.io'
+const express = require("express")
+const config = require("config")
 
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {cors:{origin:"*"}});
 
-const httpServer = http.Server(app)
-const io = socket(httpServer)
 
 const PORT = config.get("socketPort") || 5000
-const app = express()
 
 app.use(express.json())
-   .use(cors())
+const listMessages = []
 
 io.on('connection', (socket) => {
 
     console.log(`User ${socket.id} connected`)
 
+    socket.on('GET_MESSAGES', message => {
+        io.emit('GET_MESSAGES', message)
+    })
     socket.on('disconnect', () => {
         console.log(`User ${socket.id} disconnected`);
     });
 })
 
-httpServer.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`))

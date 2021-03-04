@@ -5,7 +5,6 @@
   "main": "index.js",
   "author": "TheStrikeM",
   "license": "ISC",
-  "type": "module",
   "private": false,
   "dependencies": {
     "config": "^3.3.4",
