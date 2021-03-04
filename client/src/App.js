@@ -8,6 +8,8 @@ function App() {
     const [message, setMessage] = React.useState('')
     const [messages, setMessages] = React.useState([])
     const [author, setAuthor] = React.useState('')
+
+    const messagesListEl = React.useRef(null)
     
     React.useEffect(() => {
         socket.on('GET_MESSAGES', (message) => {
@@ -16,6 +18,10 @@ function App() {
             })
         })
     }, [])
+
+    React.useEffect(() => {
+        messagesListEl.current.scrollTo(0, 99999)
+    }, [messages])
     
     const sendData = () => {
         const newMessage = {message, author}
@@ -34,7 +40,7 @@ function App() {
                 <input type="text" onChange={e => setAuthor(e.target.value)} value={author}/>
                 <button onClick={sendData}>Отправить</button>
                 <hr/>
-                <p>
+                <div ref={messagesListEl} style={{height: "400px", overflowY: "auto"}}>
                     {messages.map((e, index) => (
                         <div key={index}>
                             <div><b>{e.author}</b></div>
@@ -43,7 +49,7 @@ function App() {
                             <br/>
                         </div>
                     ))}
-                </p>
+                </div>
             </header>
         </div>
     );
